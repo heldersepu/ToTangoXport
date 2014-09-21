@@ -15,7 +15,7 @@
 @ECHO.
 @PAUSE
 @CLS
-@COPY setup.nsi ..
+@COPY xInstall\setup.nsi .
 
 %DEVENV% absToTango\absToTango.sln /Build
 %DEVENV% ToTangoXport\ToTangoXport.sln /Build
