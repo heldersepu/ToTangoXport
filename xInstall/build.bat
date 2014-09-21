@@ -1,9 +1,9 @@
 @SET DEVENV="C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe"
 
-@COPY setup.nsi ..
 @DEL *.exe
 @CD ..
 @DEL *.exe
+@DEL setup.nsi
 @RMDIR /S /Q absToTango\absToTango\bin
 @RMDIR /S /Q absToTango\absToTango\obj
 @RMDIR /S /Q ToTangoXport\ToTangoXport\bin
@@ -15,6 +15,7 @@
 @ECHO.
 @PAUSE
 @CLS
+@COPY setup.nsi ..
 
 %DEVENV% absToTango\absToTango.sln /Build
 %DEVENV% ToTangoXport\ToTangoXport.sln /Build
