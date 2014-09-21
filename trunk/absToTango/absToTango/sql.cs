@@ -19,45 +19,53 @@ namespace absToTango
             this._sqlConn = sqlConString;
         }
 
-        public string addCall()
+        public string AddCall(string name, string url)
         {
             string id = "0";
             if (!string.IsNullOrEmpty(_sqlConn))
             {
-                using (SqlConnection conn = new SqlConnection(_sqlConn))
+                try
                 {
-                    SqlCommand command = new SqlCommand("sp", conn);
-                    command.CommandType = CommandType.StoredProcedure;
-                    //command.Parameters.Add("@WebServerName", SqlDbType.Text);
-                    //command.Parameters["@WebServerName"].Value = args[i];
-                    conn.Open();
-
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    using (SqlConnection conn = new SqlConnection(_sqlConn))
                     {
-                        id = reader["id"].ToString();
+                        SqlCommand command = new SqlCommand("[event].[InsertCampaign]", conn);
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@Name", SqlDbType.Text);
+                        command.Parameters["@Name"].Value = name;
+                        command.Parameters.Add("@URL", SqlDbType.Text);
+                        command.Parameters["@URL"].Value = url;
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            id = reader["id"].ToString();
+                        }
+                        reader.Close();
+                        conn.Close();
                     }
-                    reader.Close();
-                    conn.Close();
                 }
+                catch {}
             }
             return id;
         }
 
-        public void addAttrib(string id, string key, string value)
+        public void AddAttrib(string id, string Account, string key, string value)
         {
-            if (!string.IsNullOrEmpty(_sqlConn))
+            if (!string.IsNullOrEmpty(_sqlConn) && (id != "0"))
             {
                 using (SqlConnection conn = new SqlConnection(_sqlConn))
                 {
-                    SqlCommand command = new SqlCommand("sp", conn);
+                    SqlCommand command = new SqlCommand("[event].[InsertCampaignAttribute]", conn);
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@id", SqlDbType.Text);
-                    command.Parameters["@id"].Value = id;
-                    command.Parameters.Add("@key", SqlDbType.Text);
-                    command.Parameters["@key"].Value = key;
-                    command.Parameters.Add("@value", SqlDbType.Text);
-                    command.Parameters["@value"].Value = value;
+                    command.Parameters.Add("@ID", SqlDbType.Text);
+                    command.Parameters["@ID"].Value = id;
+                    command.Parameters.Add("@Account", SqlDbType.Text);
+                    command.Parameters["@Account"].Value = Account;                    
+                    command.Parameters.Add("@Key", SqlDbType.Text);
+                    command.Parameters["@Key"].Value = key;
+                    command.Parameters.Add("@Value", SqlDbType.Text);
+                    command.Parameters["@Value"].Value = value;
                     conn.Open();
                     command.ExecuteNonQuery();
                     conn.Close();
