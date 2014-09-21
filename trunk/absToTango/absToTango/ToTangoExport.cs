@@ -108,6 +108,10 @@ namespace absToTango
             {
                 ret = account.attributes[attrib].value;
             }
+            else if ((attrib == "name") || (attrib == "account_id"))
+            {
+                ret = account[attrib].Value;
+            }             
             return ret;
         }        
 

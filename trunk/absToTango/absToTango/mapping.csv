@@ -5,5 +5,5 @@
 # Items can be tab separated for visibility.
 #
 
-MemberFullName,		MemberEmail,	MemberPhone
-name,				email,			phone
+MemberEmail,	MemberFName, 		MemberLName,		name,			Create Date,	account_id,		Status,				License,	ContractLevel,		LastAdminLogin,		LastEmployeeLogin
+Email Address,	Member First Name,	Member Last Name,	Account Name,	Create Date,	Account ID,		Account Status,		License,	Contract Level,		Last Admin Login,	Last Employee Login
