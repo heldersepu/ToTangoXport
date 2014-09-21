@@ -56,27 +56,27 @@ namespace absToTango
         /// <param name="confUrl">Optional confirmation base url</param>
         public string Start(string url, string outDirectory, string outName, string confUrl = "")
         {
-            string name = "";
-            string id = this._sqlLog.addCall();
+            string name = "";            
             List<string> lines = new List<string>();
             lines.Add(this._aliasHead);
             if (this._headers.Length > 0)
             {
                 using (ToTangoReader tangoReader = new ToTangoReader(this._token, url))
                 {
+                    name = tangoReader.ReadName();
+                    string id = this._sqlLog.AddCall(name, url);
                     dynamic account = null;
                     do
                     {
-                        account = tangoReader.ReadAccount();
+                        account = tangoReader.ReadAccount();                        
                         if (account != null)
-                        {
+                        {                            
                             lines.Add(concatAttribs(id, account));
                             if (!String.IsNullOrEmpty(confUrl))
                                 sendConfirmation(account, confUrl);
                         }
                     }
-                    while (account != null);
-                    name = tangoReader.ReadName();
+                    while (account != null);                    
                 }
             }
             string ext = Path.GetExtension(outName);
@@ -103,10 +103,11 @@ namespace absToTango
         private string concatAttribs(string id, dynamic account)
         {
             string line = "";
+            string accID = getAttrib(account, "account_id");
             foreach (string attrib in this._headArr)
             {
                 string aValue = getAttrib(account, attrib);
-                this._sqlLog.addAttrib(id, attrib, aValue);
+                this._sqlLog.AddAttrib(id, accID, attrib, aValue);
                 line += "\"" + aValue + "\",";
             }
             return line.TrimEnd(',');

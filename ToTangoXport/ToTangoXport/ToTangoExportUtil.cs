@@ -41,7 +41,7 @@ namespace ToTangoXport
             catch (Exception) { }
             if (!File.Exists(headerFile)) 
                 File.WriteAllLines(headerFile, new string [] {ConfigurationManager.AppSettings.Get("DefaultCSVHead")});
-            toTango = new ToTangoExport(token, headerFile);
+            toTango = new ToTangoExport(token, headerFile, SQLConnString);
         }
 
         private void InitializeDialog()
