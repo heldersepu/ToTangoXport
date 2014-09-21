@@ -110,6 +110,23 @@ namespace absToTango
         }
 
         /// <summary>
+        /// Reads the name of the current filter from the JSON data
+        /// </summary>
+        /// <returns>name of the current filter</returns>
+        public string ReadName()
+        {
+            string name = "";
+            try
+            {
+                if (this._dJSON.response_header.name != null)
+                    name = this._dJSON.response_header.name.Value;
+            }
+            catch {}
+            return name;
+        }
+
+
+        /// <summary>
         /// Releases all resources used by the current instance of the class
         /// </summary>
         public void Dispose()
