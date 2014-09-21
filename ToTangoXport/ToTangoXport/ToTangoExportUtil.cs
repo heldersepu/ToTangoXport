@@ -109,7 +109,7 @@ namespace ToTangoXport
             this.status.Text = "Downloading...";
             this.status2.Text = "";
             this.Refresh();
-            outname = this.toTango.Start(url, outname, baseUrl);
+            outname = this.toTango.Start(url, outDirectory, outname, baseUrl);
             this.status.Text = "Done!";
             this.status2.Text = outname;
         }
