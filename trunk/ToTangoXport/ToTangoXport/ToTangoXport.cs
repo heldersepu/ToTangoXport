@@ -92,5 +92,35 @@ namespace ToTangoXport
             Options f2 = new Options(this);
             f2.Show();
         }
+
+        private void testConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void getCampaignsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> list = GetUrlList();
+            if (list.Count > 0)
+            {
+                dataGridView.Rows.Clear();
+                foreach (string url in list)
+                {
+                    dataGridView.Rows.Add();
+                    foreach (DataGridViewRow row in dataGridView.Rows)
+                    {
+                        if (row.Cells[0].Value == null)
+                        {
+                            row.Cells[0].Value = url;
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No data received from SQL!");
+            }
+        }
     }
 }
