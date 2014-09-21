@@ -15,9 +15,11 @@ namespace ToTangoXport
     public partial class ToTangoXport
     {
         private ToTangoExport toTango;
-        private string token = "";
-        private string headerFile = "";
-        private string baseUrl = "";
+        public string token = "";
+        public string headerFile = "";
+        public string baseUrl = "";
+        public string outDirectory = "";
+        public string SQLConnString = "";
         
         public ToTangoXport()
         {
@@ -26,13 +28,15 @@ namespace ToTangoXport
             InitializeTotango();            
         }
 
-        private void InitializeTotango()
+        public void InitializeTotango()
         {            
             try
             {
                 token = ConfigurationManager.AppSettings.Get("ToTangoToken");
                 headerFile = ConfigurationManager.AppSettings.Get("HeaderFile");
                 baseUrl = ConfigurationManager.AppSettings.Get("BaseConfirmUrl");
+                outDirectory = ConfigurationManager.AppSettings.Get("OutputDirectory");
+                SQLConnString = ConfigurationManager.AppSettings.Get("SQLConnString");
             }
             catch (Exception) { }
             if (!File.Exists(headerFile)) 
@@ -92,7 +96,7 @@ namespace ToTangoXport
             File.WriteAllLines(FileName, lines);
         }
 
-        private void UpdateSetting(string key, string value)
+        public void UpdateSetting(string key, string value)
         {
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             configuration.AppSettings.Settings[key].Value = value;
