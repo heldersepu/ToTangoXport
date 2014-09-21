@@ -95,7 +95,7 @@ namespace absToTango
             foreach (string attrib in this._headArr)
             {
                 string aValue = getAttrib(account, attrib);
-                line += aValue + ",";
+                line += "\"" + aValue + "\",";
             }
             return line.TrimEnd(',');
         }
@@ -103,7 +103,7 @@ namespace absToTango
         private string getAttrib(dynamic account, string attrib)
         {
             string ret = "";
-            attrib = attrib.Trim();
+            attrib = attrib.Replace('"',' ').Trim();
             if (account.attributes[attrib] != null)
             {
                 ret = account.attributes[attrib].value;
