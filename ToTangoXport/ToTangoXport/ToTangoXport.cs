@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
-using Microsoft.VisualBasic;
 
 namespace ToTangoXport
 {
@@ -65,20 +64,6 @@ namespace ToTangoXport
             }
         }
 
-        private void changeTokenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string input = Interaction.InputBox("ToTangoXport", "Enter the ToTango API key", token, 0, 0);
-            if (input != "")
-                this.UpdateSetting("ToTangoToken", input);
-        }
-
-        private void changeMappingFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string input = Interaction.InputBox("ToTangoXport", "Enter Full path the mapping file", headerFile, 0, 0);
-            if (input != "")
-                this.UpdateSetting("HeaderFile", input);
-        }
-
         private void ToTangoXport_Load(object sender, EventArgs e)
         {
             foreach (string arg in Environment.GetCommandLineArgs())
@@ -102,11 +87,10 @@ namespace ToTangoXport
             }
         }
 
-        private void changeConfirmationURLToolStripMenuItem_Click(object sender, EventArgs e)
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string input = Interaction.InputBox("ToTangoXport", "Enter the ToTango Base url for the confirmation call", token, 0, 0);
-            if (input != "")
-                this.UpdateSetting("BaseConfirmUrl", input);
+            Options f2 = new Options(this);
+            f2.Show();
         }
     }
 }

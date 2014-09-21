@@ -36,8 +36,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeTokenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeMappingFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -49,7 +47,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.status = new System.Windows.Forms.ToolStripStatusLabel();
             this.status2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.changeConfirmationURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -117,27 +114,10 @@
             // 
             // optionsToolStripMenuItem
             // 
-            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeTokenToolStripMenuItem,
-            this.changeMappingFileToolStripMenuItem,
-            this.changeConfirmationURLToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.optionsToolStripMenuItem.Text = "O&ptions";
-            // 
-            // changeTokenToolStripMenuItem
-            // 
-            this.changeTokenToolStripMenuItem.Name = "changeTokenToolStripMenuItem";
-            this.changeTokenToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.changeTokenToolStripMenuItem.Text = "Change &Token";
-            this.changeTokenToolStripMenuItem.Click += new System.EventHandler(this.changeTokenToolStripMenuItem_Click);
-            // 
-            // changeMappingFileToolStripMenuItem
-            // 
-            this.changeMappingFileToolStripMenuItem.Name = "changeMappingFileToolStripMenuItem";
-            this.changeMappingFileToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.changeMappingFileToolStripMenuItem.Text = "Change &Mapping File";
-            this.changeMappingFileToolStripMenuItem.Click += new System.EventHandler(this.changeMappingFileToolStripMenuItem_Click);
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -225,13 +205,6 @@
             this.status2.Size = new System.Drawing.Size(0, 17);
             this.status2.Click += new System.EventHandler(this.status2_Click);
             // 
-            // changeConfirmationURLToolStripMenuItem
-            // 
-            this.changeConfirmationURLToolStripMenuItem.Name = "changeConfirmationURLToolStripMenuItem";
-            this.changeConfirmationURLToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.changeConfirmationURLToolStripMenuItem.Text = "Change Confirmation &URL";
-            this.changeConfirmationURLToolStripMenuItem.Click += new System.EventHandler(this.changeConfirmationURLToolStripMenuItem_Click);
-            // 
             // ToTangoXport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,12 +246,9 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Url;
         private System.Windows.Forms.DataGridViewButtonColumn Action;
-        private System.Windows.Forms.ToolStripMenuItem changeTokenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem changeMappingFileToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel status;
         private System.Windows.Forms.ToolStripStatusLabel status2;
-        private System.Windows.Forms.ToolStripMenuItem changeConfirmationURLToolStripMenuItem;
     }
 }
 
