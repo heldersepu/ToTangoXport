@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using absToTango;
+using System.Data.SqlClient;
+
 
 namespace ToTangoXport
 {
@@ -112,6 +114,32 @@ namespace ToTangoXport
             outname = this.toTango.Start(url, outDirectory, outname, baseUrl);
             this.status.Text = "Done!";
             this.status2.Text = outname;
+        }
+
+        private List<string> GetUrlList()
+        {
+            List<string> list = new List<string>();
+            if (!string.IsNullOrEmpty(SQLConnString))
+            {
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(SQLConnString))
+                    {
+                        SqlCommand command = new SqlCommand("[event].[GetAllCampaigns]", conn);
+                        command.CommandType = CommandType.StoredProcedure;
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            list.Add(reader["URL"].ToString());
+                        }
+                        reader.Close();
+                        conn.Close();
+                    }
+                }
+                catch { }
+            }
+            return list;
         }
     }
 }
