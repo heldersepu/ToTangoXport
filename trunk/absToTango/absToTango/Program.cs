@@ -36,7 +36,7 @@ namespace absToTango
         {
             string url = "https://app.totango.com/api/v1/accounts/active_list/10010/current.json";
             var tangoXport = new ToTangoExport(token, "mapping.csv");
-            tangoXport.Start(url, "test.csv");
+            tangoXport.Start(url, ".", "test.csv");
         }
 
         static void TestReader(string token)

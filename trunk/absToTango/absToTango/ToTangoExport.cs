@@ -51,9 +51,10 @@ namespace absToTango
         /// Start the export on the given url
         /// </summary>
         /// <param name="url">The Url to the API, something like: https://app.totango.com/api/v1/accounts/active_list/10010/current.json</param> 
-        /// <param name="outname">The name of the output file</param>
+        /// <param name="outDirectory">The directory for output file</param>
+        /// <param name="outName">The name of the output file</param>        
         /// <param name="confUrl">Optional confirmation base url</param>
-        public string Start(string url, string outname, string confUrl = "")
+        public string Start(string url, string outDirectory, string outName, string confUrl = "")
         {
             string id = this._sqlLog.addCall();
             List<string> lines = new List<string>();
@@ -76,9 +77,9 @@ namespace absToTango
                     while (account != null);
                 }
             }
-            outname = newName(outname);
-            File.WriteAllLines(outname, lines);
-            return outname;
+            outName = newName(outDirectory + "\\" + outName);
+            File.WriteAllLines(outName, lines);
+            return outName;
         }
 
 #region "  Private Methods  "
