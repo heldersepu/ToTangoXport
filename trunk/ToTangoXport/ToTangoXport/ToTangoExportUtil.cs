@@ -34,7 +34,7 @@ namespace ToTangoXport
             }
             catch (Exception) { }
             if (!File.Exists(headerFile)) 
-                File.WriteAllLines(headerFile, new string [] {"MemberFullName,MemberEmail,MemberPhone"});
+                File.WriteAllLines(headerFile, new string [] {ConfigurationManager.AppSettings.Get("DefaultCSVHead")});
             toTango = new ToTangoExport(token, headerFile);
         }
 
@@ -55,16 +55,19 @@ namespace ToTangoXport
 
         private void loadFromFile(string FileName)
         {
-            dataGridView.Rows.Clear();
-            foreach (string line in File.ReadAllLines(FileName))
+            if (File.Exists(FileName))
             {
-                dataGridView.Rows.Add();
-                foreach (DataGridViewRow row in dataGridView.Rows)
+                dataGridView.Rows.Clear();
+                foreach (string line in File.ReadAllLines(FileName))
                 {
-                    if (row.Cells[0].Value == null)
+                    dataGridView.Rows.Add();
+                    foreach (DataGridViewRow row in dataGridView.Rows)
                     {
-                        row.Cells[0].Value = line;
-                        break;
+                        if (row.Cells[0].Value == null)
+                        {
+                            row.Cells[0].Value = line;
+                            break;
+                        }
                     }
                 }
             }
