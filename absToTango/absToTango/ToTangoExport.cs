@@ -56,6 +56,7 @@ namespace absToTango
         /// <param name="confUrl">Optional confirmation base url</param>
         public string Start(string url, string outDirectory, string outName, string confUrl = "")
         {
+            string name = "";
             string id = this._sqlLog.addCall();
             List<string> lines = new List<string>();
             lines.Add(this._aliasHead);
@@ -75,23 +76,25 @@ namespace absToTango
                         }
                     }
                     while (account != null);
+                    name = tangoReader.ReadName();
                 }
             }
-            outName = newName(outDirectory + "\\" + outName);
+            string ext = Path.GetExtension(outName);
+            if (name != "") outName = name + ext;
+            outName = newName(outDirectory + "\\" + outName, ext);
             File.WriteAllLines(outName, lines);
             return outName;
         }
 
 #region "  Private Methods  "
 
-        private string newName(string outname)
+        private string newName(string outname, string ext)
         {
-            string dName = outname;
+            string dName = outname.Replace(ext, "");
             int i = 0;
             while (File.Exists(outname))
-            {
-                string ext = Path.GetExtension(outname);
-                outname = dName.Replace(ext, "") + i.ToString() + ext;
+            {                
+                outname = dName + i.ToString() + ext;
                 i++;
             }
             return outname;
