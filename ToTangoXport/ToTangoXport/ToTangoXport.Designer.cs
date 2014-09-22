@@ -34,6 +34,9 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getCampaignsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,9 +50,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.status = new System.Windows.Forms.ToolStripStatusLabel();
             this.status2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getCampaignsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -107,6 +108,29 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // sQLToolStripMenuItem
+            // 
+            this.sQLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testConnectionToolStripMenuItem,
+            this.getCampaignsToolStripMenuItem});
+            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
+            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.sQLToolStripMenuItem.Text = "&SQL";
+            // 
+            // testConnectionToolStripMenuItem
+            // 
+            this.testConnectionToolStripMenuItem.Name = "testConnectionToolStripMenuItem";
+            this.testConnectionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.testConnectionToolStripMenuItem.Text = "&Test Connection";
+            this.testConnectionToolStripMenuItem.Click += new System.EventHandler(this.testConnectionToolStripMenuItem_Click);
+            // 
+            // getCampaignsToolStripMenuItem
+            // 
+            this.getCampaignsToolStripMenuItem.Name = "getCampaignsToolStripMenuItem";
+            this.getCampaignsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.getCampaignsToolStripMenuItem.Text = "Get &Campaigns";
+            this.getCampaignsToolStripMenuItem.Click += new System.EventHandler(this.getCampaignsToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -209,28 +233,11 @@
             this.status2.Size = new System.Drawing.Size(0, 17);
             this.status2.Click += new System.EventHandler(this.status2_Click);
             // 
-            // sQLToolStripMenuItem
+            // backgroundWorker
             // 
-            this.sQLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testConnectionToolStripMenuItem,
-            this.getCampaignsToolStripMenuItem});
-            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
-            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
-            this.sQLToolStripMenuItem.Text = "&SQL";
-            // 
-            // testConnectionToolStripMenuItem
-            // 
-            this.testConnectionToolStripMenuItem.Name = "testConnectionToolStripMenuItem";
-            this.testConnectionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.testConnectionToolStripMenuItem.Text = "&Test Connection";
-            this.testConnectionToolStripMenuItem.Click += new System.EventHandler(this.testConnectionToolStripMenuItem_Click);
-            // 
-            // getCampaignsToolStripMenuItem
-            // 
-            this.getCampaignsToolStripMenuItem.Name = "getCampaignsToolStripMenuItem";
-            this.getCampaignsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.getCampaignsToolStripMenuItem.Text = "Get &Campaigns";
-            this.getCampaignsToolStripMenuItem.Click += new System.EventHandler(this.getCampaignsToolStripMenuItem_Click);
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // ToTangoXport
             // 
@@ -279,6 +286,7 @@
         private System.Windows.Forms.ToolStripMenuItem sQLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testConnectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getCampaignsToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
 
