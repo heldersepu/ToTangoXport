@@ -68,15 +68,20 @@ namespace ToTangoXport
                 dataGridView.Rows.Clear();
                 foreach (string line in File.ReadAllLines(FileName))
                 {
-                    dataGridView.Rows.Add();
-                    foreach (DataGridViewRow row in dataGridView.Rows)
-                    {
-                        if (row.Cells[0].Value == null)
-                        {
-                            row.Cells[0].Value = line;
-                            break;
-                        }
-                    }
+                    dataGridViewRowsAdd(line);
+                }
+            }
+        }
+
+        private void dataGridViewRowsAdd(string line)
+        {
+            dataGridView.Rows.Add();
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (row.Cells[0].Value == null)
+                {
+                    row.Cells[0].Value = line;
+                    break;
                 }
             }
         }
@@ -140,6 +145,27 @@ namespace ToTangoXport
                 catch { }
             }
             return list;
+        }
+
+        private bool TestSQL()
+        {
+            bool isOK = false;
+            if (!string.IsNullOrEmpty(SQLConnString))
+            {
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(SQLConnString))
+                    {                        
+                        conn.Open();
+                        isOK = true;
+                    }
+                }
+                catch
+                {
+                    isOK = false;
+                }
+            }
+            return isOK;
         }
     }
 }

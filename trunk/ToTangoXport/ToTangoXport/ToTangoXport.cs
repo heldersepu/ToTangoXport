@@ -95,7 +95,10 @@ namespace ToTangoXport
 
         private void testConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (TestSQL())
+                MessageBox.Show("Test passed, connection is OK!");
+            else
+                MessageBox.Show("Test failed!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void getCampaignsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -106,15 +109,7 @@ namespace ToTangoXport
                 dataGridView.Rows.Clear();
                 foreach (string url in list)
                 {
-                    dataGridView.Rows.Add();
-                    foreach (DataGridViewRow row in dataGridView.Rows)
-                    {
-                        if (row.Cells[0].Value == null)
-                        {
-                            row.Cells[0].Value = url;
-                            break;
-                        }
-                    }
+                    dataGridViewRowsAdd(url);
                 }
             }
             else
