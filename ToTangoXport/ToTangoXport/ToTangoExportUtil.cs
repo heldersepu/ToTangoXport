@@ -75,13 +75,17 @@ namespace ToTangoXport
 
         private void dataGridViewRowsAdd(string line)
         {
-            dataGridView.Rows.Add();
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            line = line.Trim();
+            if (line != "")
             {
-                if (row.Cells[0].Value == null)
+                dataGridView.Rows.Add();
+                foreach (DataGridViewRow row in dataGridView.Rows)
                 {
-                    row.Cells[0].Value = line;
-                    break;
+                    if (row.Cells[0].Value == null)
+                    {
+                        row.Cells[0].Value = line;
+                        break;
+                    }
                 }
             }
         }
