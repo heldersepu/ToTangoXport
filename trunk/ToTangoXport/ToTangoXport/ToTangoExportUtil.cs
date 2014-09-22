@@ -154,7 +154,7 @@ namespace ToTangoXport
             {
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(SQLConnString))
+                    using (SqlConnection conn = new SqlConnection(SQLConnString + ";ConnectTimeout=2"))
                     {                        
                         conn.Open();
                         isOK = true;
