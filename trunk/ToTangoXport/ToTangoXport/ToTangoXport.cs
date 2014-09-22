@@ -95,10 +95,17 @@ namespace ToTangoXport
 
         private void testConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.status.Text = "Testing SQL connection...";
             if (TestSQL())
-                MessageBox.Show("Test passed, connection is OK!");
+            {
+                this.status.Text = "Test passed, connection is OK!";
+                MessageBox.Show("Test passed, connection is OK!", "ToTangoXport", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
-                MessageBox.Show("Test failed!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                this.status.Text = "Test failed!";
+                MessageBox.Show("Test failed!", "ToTangoXport", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void getCampaignsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,8 +121,42 @@ namespace ToTangoXport
             }
             else
             {
-                MessageBox.Show("No data received from SQL!");
+                this.status.Text = "No data received from SQL!";
+                MessageBox.Show("No data received from SQL!", "ToTangoXport", MessageBoxButtons.OK, MessageBoxIcon.Error);                
             }
+        }
+
+
+        private string outputName;
+        private string downloadURL;
+        private void Download(string url, string outname)
+        {
+            dataGridView.Enabled = false;
+            if (!backgroundWorker.IsBusy)
+            {
+                outputName = outname;
+                downloadURL = url;
+                backgroundWorker.RunWorkerAsync();
+            }
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            this.status.Text = "Downloading...";
+            this.status2.Text = "";
+            outputName = this.toTango.Start(downloadURL, outDirectory, outputName, baseUrl);
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            this.Refresh();
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            dataGridView.Enabled = true;
+            this.status.Text = "Done!";
+            this.status2.Text = outputName;
         }
     }
 }

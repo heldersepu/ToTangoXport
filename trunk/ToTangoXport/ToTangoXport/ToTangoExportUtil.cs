@@ -115,16 +115,6 @@ namespace ToTangoXport
             ConfigurationManager.RefreshSection("appSettings");
         }
 
-        private void Download(string url, string outname)
-        {
-            this.status.Text = "Downloading...";
-            this.status2.Text = "";
-            this.Refresh();
-            outname = this.toTango.Start(url, outDirectory, outname, baseUrl);
-            this.status.Text = "Done!";
-            this.status2.Text = outname;
-        }
-
         private List<string> GetUrlList()
         {
             List<string> list = new List<string>();
@@ -158,7 +148,7 @@ namespace ToTangoXport
             {
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(SQLConnString + ";ConnectTimeout=2"))
+                    using (SqlConnection conn = new SqlConnection(SQLConnString + ";Connection Timeout=2"))
                     {                        
                         conn.Open();
                         isOK = true;
