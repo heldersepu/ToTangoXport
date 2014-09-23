@@ -80,7 +80,7 @@ namespace absToTango
                 }
             }
             string ext = Path.GetExtension(outName);
-            if (name != "") outName = name + ext;
+            if (name != "") outName = cleanName(name) + ext;
             outName = newName(outDirectory + "\\" + outName, ext);
             File.WriteAllLines(outName, lines);
             return outName;
@@ -88,6 +88,20 @@ namespace absToTango
 
 #region "  Private Methods  "
 
+        private string cleanName(string name)
+        {
+            name = name.Replace('/', '_');
+            name = name.Replace('\\', '_');
+            name = name.Replace(':', '_');
+            name = name.Replace('*', '_');
+            name = name.Replace('?', '_');
+            name = name.Replace('"', '_');
+            name = name.Replace('>', '_');
+            name = name.Replace('<', '_');
+            name = name.Replace('|', '_');
+            return name;
+        }
+        
         private string newName(string outname, string ext)
         {
             string dName = outname.Replace(ext, "");
