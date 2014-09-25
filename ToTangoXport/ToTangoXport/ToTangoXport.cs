@@ -78,9 +78,17 @@ namespace ToTangoXport
                 Console.WriteLine("");
                 this.Close();
             }
-            string lastFile = ConfigurationManager.AppSettings.Get("LastOpenFile");
-            if (lastFile != "")
-                this.loadFromFile(lastFile);
+            else
+            {
+                string lastFile = ConfigurationManager.AppSettings.Get("LastOpenFile");
+                if (lastFile != "")
+                {
+                    if (lastFile == "GetUrlListFromSQL")
+                        getCampaignsToolStripMenuItem_Click(sender, e);
+                    else
+                        this.loadFromFile(lastFile);
+                }
+            }
         }
 
         private void ProcessCommandLine(string[] args)
@@ -143,6 +151,7 @@ namespace ToTangoXport
             List<string> list = GetUrlListFromSQL();
             if (list.Count > 0)
             {
+                this.UpdateSetting("LastOpenFile", "GetUrlListFromSQL");
                 dataGridView.Rows.Clear();
                 foreach (string url in list)
                 {
