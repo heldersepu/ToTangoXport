@@ -34,7 +34,7 @@ namespace ToTangoXport
         private void Options_Load(object sender, EventArgs e)
         {
             txbMappingFile.Text = parent.headerFile;
-            txbConfirmUrl.Text = parent.baseUrl;
+            txbConfirmUrl.Text = parent.baseConfirmUrl;
             txbToken.Text = parent.token;
             txbOutputDirectory.Text = parent.outDirectory;
             txbSQLConnection.Text = parent.SQLConnString;
