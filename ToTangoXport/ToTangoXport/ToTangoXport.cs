@@ -72,7 +72,7 @@ namespace ToTangoXport
         private void ToTangoXport_Load(object sender, EventArgs e)
         {
             string[] args = Environment.GetCommandLineArgs();
-            if (args.Length > 0)
+            if (args.Length > 1)
             {
                 this.Hide();
                 AttachConsole(-1);

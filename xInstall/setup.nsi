@@ -1,5 +1,5 @@
 !define PRODUCT_NAME "ToTangoXport"
-!define PRODUCT_VERSION "1.2.0.1"
+!define PRODUCT_VERSION "1.3.0.1"
 !include nsDialogs.nsh
 
 ; The name of the installer
