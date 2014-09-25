@@ -31,6 +31,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnTestDir = new System.Windows.Forms.Button();
+            this.txbOutputDirectory = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txbConfirmUrl = new System.Windows.Forms.TextBox();
             this.txbMappingFile = new System.Windows.Forms.TextBox();
@@ -47,8 +49,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.txbOutputDirectory = new System.Windows.Forms.ComboBox();
-            this.btnTestDir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -93,6 +93,32 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnTestDir
+            // 
+            this.btnTestDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestDir.Location = new System.Drawing.Point(427, 124);
+            this.btnTestDir.Name = "btnTestDir";
+            this.btnTestDir.Size = new System.Drawing.Size(56, 22);
+            this.btnTestDir.TabIndex = 26;
+            this.btnTestDir.Text = "Test";
+            this.btnTestDir.UseVisualStyleBackColor = true;
+            this.btnTestDir.Click += new System.EventHandler(this.btnTestDir_Click);
+            // 
+            // txbOutputDirectory
+            // 
+            this.txbOutputDirectory.FormattingEnabled = true;
+            this.txbOutputDirectory.Items.AddRange(new object[] {
+            ".",
+            "\\\\nas\\dir\\QA\\ExactTarget",
+            "\\\\nas\\dir\\Prod\\ExactTarget"});
+            this.txbOutputDirectory.Location = new System.Drawing.Point(129, 124);
+            this.txbOutputDirectory.Name = "txbOutputDirectory";
+            this.txbOutputDirectory.Size = new System.Drawing.Size(296, 21);
+            this.txbOutputDirectory.TabIndex = 17;
+            this.txbOutputDirectory.DropDown += new System.EventHandler(this.txbOutputDirectory_SelectedIndexChanged);
+            this.txbOutputDirectory.SelectedIndexChanged += new System.EventHandler(this.txbOutputDirectory_SelectedIndexChanged);
+            this.txbOutputDirectory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txbOutputDirectory_KeyDown);
             // 
             // label4
             // 
@@ -171,7 +197,7 @@
             // 
             this.btnTest.Enabled = false;
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTest.Location = new System.Drawing.Point(421, 50);
+            this.btnTest.Location = new System.Drawing.Point(426, 55);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(56, 22);
             this.btnTest.TabIndex = 25;
@@ -183,7 +209,7 @@
             // 
             this.BackupN.AutoSize = true;
             this.BackupN.Checked = true;
-            this.BackupN.Location = new System.Drawing.Point(239, 73);
+            this.BackupN.Location = new System.Drawing.Point(239, 78);
             this.BackupN.Name = "BackupN";
             this.BackupN.Size = new System.Drawing.Size(39, 17);
             this.BackupN.TabIndex = 24;
@@ -194,7 +220,7 @@
             // BackupY
             // 
             this.BackupY.AutoSize = true;
-            this.BackupY.Location = new System.Drawing.Point(190, 73);
+            this.BackupY.Location = new System.Drawing.Point(190, 78);
             this.BackupY.Name = "BackupY";
             this.BackupY.Size = new System.Drawing.Size(43, 17);
             this.BackupY.TabIndex = 23;
@@ -204,7 +230,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 69);
+            this.label6.Location = new System.Drawing.Point(51, 78);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(122, 13);
             this.label6.TabIndex = 22;
@@ -213,8 +239,9 @@
             // txbSQLConnection
             // 
             this.txbSQLConnection.Location = new System.Drawing.Point(123, 27);
+            this.txbSQLConnection.Multiline = true;
             this.txbSQLConnection.Name = "txbSQLConnection";
-            this.txbSQLConnection.Size = new System.Drawing.Size(354, 20);
+            this.txbSQLConnection.Size = new System.Drawing.Size(354, 40);
             this.txbSQLConnection.TabIndex = 21;
             this.txbSQLConnection.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txbSQLConnection_KeyDown);
             // 
@@ -246,32 +273,6 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // txbOutputDirectory
-            // 
-            this.txbOutputDirectory.FormattingEnabled = true;
-            this.txbOutputDirectory.Items.AddRange(new object[] {
-            ".",
-            "\\\\nas\\dir\\QA\\ExactTarget",
-            "\\\\nas\\dir\\Prod\\ExactTarget"});
-            this.txbOutputDirectory.Location = new System.Drawing.Point(129, 124);
-            this.txbOutputDirectory.Name = "txbOutputDirectory";
-            this.txbOutputDirectory.Size = new System.Drawing.Size(296, 21);
-            this.txbOutputDirectory.TabIndex = 17;
-            this.txbOutputDirectory.DropDown += new System.EventHandler(this.txbOutputDirectory_SelectedIndexChanged);
-            this.txbOutputDirectory.SelectedIndexChanged += new System.EventHandler(this.txbOutputDirectory_SelectedIndexChanged);
-            this.txbOutputDirectory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txbOutputDirectory_KeyDown);
-            // 
-            // btnTestDir
-            // 
-            this.btnTestDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTestDir.Location = new System.Drawing.Point(427, 124);
-            this.btnTestDir.Name = "btnTestDir";
-            this.btnTestDir.Size = new System.Drawing.Size(56, 22);
-            this.btnTestDir.TabIndex = 26;
-            this.btnTestDir.Text = "Test";
-            this.btnTestDir.UseVisualStyleBackColor = true;
-            this.btnTestDir.Click += new System.EventHandler(this.btnTestDir_Click);
             // 
             // Options
             // 
