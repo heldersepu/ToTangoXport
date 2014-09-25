@@ -29,12 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txbOutputDirectory = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txbConfirmUrl = new System.Windows.Forms.TextBox();
             this.txbMappingFile = new System.Windows.Forms.TextBox();
@@ -42,12 +38,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnTest = new System.Windows.Forms.Button();
+            this.BackupN = new System.Windows.Forms.RadioButton();
+            this.BackupY = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
             this.txbSQLConnection = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.BackupY = new System.Windows.Forms.RadioButton();
-            this.BackupN = new System.Windows.Forms.RadioButton();
-            this.btnTest = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.txbOutputDirectory = new System.Windows.Forms.ComboBox();
+            this.btnTestDir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -64,26 +65,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Configuration Options ";
             // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(366, 254);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(466, 254);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -96,6 +77,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnTestDir);
             this.tabPage1.Controls.Add(this.txbOutputDirectory);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.txbConfirmUrl);
@@ -112,33 +94,10 @@
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.btnTest);
-            this.tabPage2.Controls.Add(this.BackupN);
-            this.tabPage2.Controls.Add(this.BackupY);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.txbSQLConnection);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(521, 174);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "SQL";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // txbOutputDirectory
-            // 
-            this.txbOutputDirectory.Location = new System.Drawing.Point(129, 127);
-            this.txbOutputDirectory.Name = "txbOutputDirectory";
-            this.txbOutputDirectory.Size = new System.Drawing.Size(354, 20);
-            this.txbOutputDirectory.TabIndex = 17;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(38, 130);
+            this.label4.Location = new System.Drawing.Point(41, 128);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 13);
             this.label4.TabIndex = 16;
@@ -146,7 +105,7 @@
             // 
             // txbConfirmUrl
             // 
-            this.txbConfirmUrl.Location = new System.Drawing.Point(129, 93);
+            this.txbConfirmUrl.Location = new System.Drawing.Point(129, 90);
             this.txbConfirmUrl.Name = "txbConfirmUrl";
             this.txbConfirmUrl.Size = new System.Drawing.Size(354, 20);
             this.txbConfirmUrl.TabIndex = 15;
@@ -168,7 +127,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 96);
+            this.label3.Location = new System.Drawing.Point(38, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 13);
             this.label3.TabIndex = 12;
@@ -192,6 +151,65 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Token:";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btnTest);
+            this.tabPage2.Controls.Add(this.BackupN);
+            this.tabPage2.Controls.Add(this.BackupY);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.txbSQLConnection);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(521, 174);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "SQL";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnTest
+            // 
+            this.btnTest.Enabled = false;
+            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.Location = new System.Drawing.Point(421, 50);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(56, 22);
+            this.btnTest.TabIndex = 25;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
+            // BackupN
+            // 
+            this.BackupN.AutoSize = true;
+            this.BackupN.Checked = true;
+            this.BackupN.Location = new System.Drawing.Point(239, 73);
+            this.BackupN.Name = "BackupN";
+            this.BackupN.Size = new System.Drawing.Size(39, 17);
+            this.BackupN.TabIndex = 24;
+            this.BackupN.TabStop = true;
+            this.BackupN.Text = "No";
+            this.BackupN.UseVisualStyleBackColor = true;
+            // 
+            // BackupY
+            // 
+            this.BackupY.AutoSize = true;
+            this.BackupY.Location = new System.Drawing.Point(190, 73);
+            this.BackupY.Name = "BackupY";
+            this.BackupY.Size = new System.Drawing.Size(43, 17);
+            this.BackupY.TabIndex = 23;
+            this.BackupY.Text = "Yes";
+            this.BackupY.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(32, 69);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(122, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Backup the data to SQL";
+            // 
             // txbSQLConnection
             // 
             this.txbSQLConnection.Location = new System.Drawing.Point(123, 27);
@@ -209,48 +227,51 @@
             this.label5.TabIndex = 20;
             this.label5.Text = "SQL Connection:";
             // 
-            // label6
+            // btnSave
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 69);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(122, 13);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Backup the data to SQL";
+            this.btnSave.Location = new System.Drawing.Point(366, 254);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // BackupY
+            // btnCancel
             // 
-            this.BackupY.AutoSize = true;
-            this.BackupY.Location = new System.Drawing.Point(190, 73);
-            this.BackupY.Name = "BackupY";
-            this.BackupY.Size = new System.Drawing.Size(43, 17);
-            this.BackupY.TabIndex = 23;
-            this.BackupY.Text = "Yes";
-            this.BackupY.UseVisualStyleBackColor = true;
+            this.btnCancel.Location = new System.Drawing.Point(466, 254);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // BackupN
+            // txbOutputDirectory
             // 
-            this.BackupN.AutoSize = true;
-            this.BackupN.Checked = true;
-            this.BackupN.Location = new System.Drawing.Point(239, 73);
-            this.BackupN.Name = "BackupN";
-            this.BackupN.Size = new System.Drawing.Size(39, 17);
-            this.BackupN.TabIndex = 24;
-            this.BackupN.TabStop = true;
-            this.BackupN.Text = "No";
-            this.BackupN.UseVisualStyleBackColor = true;
+            this.txbOutputDirectory.FormattingEnabled = true;
+            this.txbOutputDirectory.Items.AddRange(new object[] {
+            ".",
+            "\\\\nas\\dir\\QA\\ExactTarget",
+            "\\\\nas\\dir\\Prod\\ExactTarget"});
+            this.txbOutputDirectory.Location = new System.Drawing.Point(129, 124);
+            this.txbOutputDirectory.Name = "txbOutputDirectory";
+            this.txbOutputDirectory.Size = new System.Drawing.Size(296, 21);
+            this.txbOutputDirectory.TabIndex = 17;
+            this.txbOutputDirectory.DropDown += new System.EventHandler(this.txbOutputDirectory_SelectedIndexChanged);
+            this.txbOutputDirectory.SelectedIndexChanged += new System.EventHandler(this.txbOutputDirectory_SelectedIndexChanged);
+            this.txbOutputDirectory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txbOutputDirectory_KeyDown);
             // 
-            // btnTest
+            // btnTestDir
             // 
-            this.btnTest.Enabled = false;
-            this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTest.Location = new System.Drawing.Point(421, 50);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(56, 22);
-            this.btnTest.TabIndex = 25;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            this.btnTestDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestDir.Location = new System.Drawing.Point(427, 124);
+            this.btnTestDir.Name = "btnTestDir";
+            this.btnTestDir.Size = new System.Drawing.Size(56, 22);
+            this.btnTestDir.TabIndex = 26;
+            this.btnTestDir.Text = "Test";
+            this.btnTestDir.UseVisualStyleBackColor = true;
+            this.btnTestDir.Click += new System.EventHandler(this.btnTestDir_Click);
             // 
             // Options
             // 
@@ -283,7 +304,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TextBox txbOutputDirectory;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txbConfirmUrl;
         private System.Windows.Forms.TextBox txbMappingFile;
@@ -298,5 +318,7 @@
         private System.Windows.Forms.RadioButton BackupN;
         private System.Windows.Forms.RadioButton BackupY;
         private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.ComboBox txbOutputDirectory;
+        private System.Windows.Forms.Button btnTestDir;
     }
 }
