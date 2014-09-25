@@ -22,12 +22,12 @@ namespace ToTangoXport
         public string baseUrl = "";
         public string outDirectory = "";
         public string SQLConnString = "";
-        
+
         public ToTangoXport()
         {
             InitializeComponent();
             InitializeDialog();
-            InitializeTotango();            
+            InitializeTotango();           
         }
 
         public void InitializeTotango()
@@ -115,7 +115,7 @@ namespace ToTangoXport
             ConfigurationManager.RefreshSection("appSettings");
         }
 
-        private List<string> GetUrlList()
+        private List<string> GetUrlListFromSQL()
         {
             List<string> list = new List<string>();
             if (!string.IsNullOrEmpty(SQLConnString))

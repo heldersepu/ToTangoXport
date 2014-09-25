@@ -8,11 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Runtime.InteropServices;
 
 namespace ToTangoXport
 {
     public partial class ToTangoXport : Form
     {
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AttachConsole(int dwProcessId);
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -66,14 +71,35 @@ namespace ToTangoXport
 
         private void ToTangoXport_Load(object sender, EventArgs e)
         {
-            foreach (string arg in Environment.GetCommandLineArgs())
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 0)
             {
-                if (arg.StartsWith("url="))
+                this.Hide();
+                AttachConsole(-1);
+                Console.WriteLine("");
+                foreach (string arg in args)
                 {
-                    this.Download(arg.Replace("url=",""), "download.csv");
-                    this.Close();
+                    Console.WriteLine("");
+                    if (arg.StartsWith("url="))
+                    {
+                        Console.WriteLine(arg);
+                        this.Download(arg.Replace("url=", ""), "download.csv");
+                    }
+                    else if (arg.ToUpper() == "USESQL")
+                    {
+                        List<string> list = GetUrlListFromSQL();
+                        Console.Write("Total URL(s) to process = ");
+                        Console.WriteLine(list.Count);
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            Console.WriteLine(list[i]);
+                            this.Download(list[i], i.ToString() + ".csv");
+                        }
+                    }
                 }
-            }            
+                Console.WriteLine("");
+                this.Close();
+            }
             string lastFile = ConfigurationManager.AppSettings.Get("LastOpenFile");
             if (lastFile != "")
                 this.loadFromFile(lastFile);
@@ -110,7 +136,7 @@ namespace ToTangoXport
 
         private void getCampaignsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> list = GetUrlList();
+            List<string> list = GetUrlListFromSQL();
             if (list.Count > 0)
             {
                 dataGridView.Rows.Clear();
