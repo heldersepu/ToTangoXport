@@ -19,8 +19,9 @@
 
 %DEVENV% absToTango\absToTango.sln /Build
 %DEVENV% ToTangoXport\ToTangoXport.sln /Build
-COPY  absToTango\absToTango\mapping.csv 			ToTangoXport\ToTangoXport\bin\Debug
-COPY  ToTangoXport\ToTangoXport\sample.ToTango 		ToTangoXport\ToTangoXport\bin\Debug
+COPY  absToTango\absToTango\mapping.csv             ToTangoXport\ToTangoXport\bin\Debug
+COPY  absToTango\absToTango\NLog.config             ToTangoXport\ToTangoXport\bin\Debug
+COPY  ToTangoXport\ToTangoXport\sample.ToTango      ToTangoXport\ToTangoXport\bin\Debug
 
 @ECHO.
 @DEL /F /S *.pdb 
