@@ -73,32 +73,37 @@ namespace ToTangoXport
                 this.Hide();
                 AttachConsole(-1);
                 Console.WriteLine("");
-                foreach (string arg in args)
-                {
-                    Console.WriteLine("");
-                    if (arg.StartsWith("url="))
-                    {
-                        Console.WriteLine(arg);
-                        this.Download(arg.Replace("url=", ""), "download.csv");
-                    }
-                    else if (arg.ToUpper() == "USESQL")
-                    {
-                        List<string> list = GetUrlListFromSQL();
-                        Console.Write("Total URL(s) to process = ");
-                        Console.WriteLine(list.Count);
-                        for (int i = 0; i < list.Count; i++)
-                        {
-                            Console.WriteLine(list[i]);
-                            this.Download(list[i], i.ToString() + ".csv");
-                        }
-                    }
-                }
+                ProcessCommandLine(args);
                 Console.WriteLine("");
                 this.Close();
             }
             string lastFile = ConfigurationManager.AppSettings.Get("LastOpenFile");
             if (lastFile != "")
                 this.loadFromFile(lastFile);
+        }
+
+        private void ProcessCommandLine(string[] args)
+        {
+            foreach (string arg in args)
+            {
+                Console.WriteLine("");
+                if (arg.StartsWith("url="))
+                {
+                    Console.WriteLine(arg);
+                    this.toTango.Start(arg.Replace("url=", ""), outDirectory, "download.csv", baseConfirmUrl);
+                }
+                else if (arg.ToUpper() == "USESQL")
+                {
+                    List<string> list = GetUrlListFromSQL();
+                    Console.Write("Total URL(s) to process = ");
+                    Console.WriteLine(list.Count);
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        Console.WriteLine(list[i]);
+                        this.toTango.Start(list[i], outDirectory, i.ToString() + ".csv", baseConfirmUrl);
+                    }
+                }
+            }
         }
 
         private void status2_Click(object sender, EventArgs e)
@@ -166,7 +171,7 @@ namespace ToTangoXport
         {
             this.status.Text = "Downloading...";
             this.status2.Text = "";
-            outputName = this.toTango.Start(downloadURL, outDirectory, outputName, baseUrl);
+            outputName = this.toTango.Start(downloadURL, outDirectory, outputName, baseConfirmUrl);
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

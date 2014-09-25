@@ -15,7 +15,7 @@ namespace ToTangoXport
         private ToTangoExport toTango;
         public string token = "";
         public string headerFile = "";
-        public string baseUrl = "";
+        public string baseConfirmUrl = "";
         public string outDirectory = "";
         public string SQLConnString = "";
         public bool CopyExport2SQL = false;
@@ -33,15 +33,15 @@ namespace ToTangoXport
             {
                 token = ConfigurationManager.AppSettings.Get("ToTangoToken");
                 headerFile = ConfigurationManager.AppSettings.Get("HeaderFile");
-                baseUrl = ConfigurationManager.AppSettings.Get("BaseConfirmUrl");
-                outDirectory = ConfigurationManager.AppSettings.Get("OutputDirectory");
+                baseConfirmUrl = ConfigurationManager.AppSettings.Get("BaseConfirmUrl");
+                outDirectory = ConfigurationManager.AppSettings.Get("OutputDirectory");                
                 SQLConnString = ConfigurationManager.AppSettings.Get("SQLConnString");
-                CopyExport2SQL = (ConfigurationManager.AppSettings.Get("CopyExport2SQL") == "1");
+                CopyExport2SQL = (ConfigurationManager.AppSettings.Get("CopyExport2SQL") == "1");  
             }
             catch (Exception) { }
             if (!File.Exists(headerFile)) 
                 File.WriteAllLines(headerFile, new string [] {ConfigurationManager.AppSettings.Get("DefaultCSVHead")});
-            toTango = new ToTangoExport(token, headerFile, SQLConnString);
+            toTango = new ToTangoExport(token, headerFile, (CopyExport2SQL ? SQLConnString : ""));
         }
 
         private void InitializeDialog()
