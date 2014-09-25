@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
+using absToTango;
 using System.Windows.Forms;
 using System.Configuration;
+using System.ComponentModel;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace ToTangoXport
@@ -89,7 +90,8 @@ namespace ToTangoXport
                 Console.WriteLine("");
                 if (arg.StartsWith("url="))
                 {
-                    Console.WriteLine(arg);
+                    nlog.SaveDebug(arg);
+                    Console.WriteLine(arg);                    
                     this.toTango.Start(arg.Replace("url=", ""), outDirectory, "download.csv", baseConfirmUrl);
                 }
                 else if (arg.ToUpper() == "USESQL")
@@ -99,6 +101,7 @@ namespace ToTangoXport
                     Console.WriteLine(list.Count);
                     for (int i = 0; i < list.Count; i++)
                     {
+                        nlog.SaveDebug(list[i]);
                         Console.WriteLine(list[i]);
                         this.toTango.Start(list[i], outDirectory, i.ToString() + ".csv", baseConfirmUrl);
                     }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
+using absToTango;
 using System.Data;
 using System.Windows.Forms;
 using System.Configuration;
-using absToTango;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 
 namespace ToTangoXport
@@ -28,17 +28,20 @@ namespace ToTangoXport
         }
 
         public void InitializeTotango()
-        {            
+        {
             try
             {
                 token = ConfigurationManager.AppSettings.Get("ToTangoToken");
                 headerFile = ConfigurationManager.AppSettings.Get("HeaderFile");
                 baseConfirmUrl = ConfigurationManager.AppSettings.Get("BaseConfirmUrl");
-                outDirectory = ConfigurationManager.AppSettings.Get("OutputDirectory");                
+                outDirectory = ConfigurationManager.AppSettings.Get("OutputDirectory");
                 SQLConnString = ConfigurationManager.AppSettings.Get("SQLConnString");
-                CopyExport2SQL = (ConfigurationManager.AppSettings.Get("CopyExport2SQL") == "1");  
+                CopyExport2SQL = (ConfigurationManager.AppSettings.Get("CopyExport2SQL") == "1");
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+                nlog.SaveException(e);
+            }
             if (!File.Exists(headerFile)) 
                 File.WriteAllLines(headerFile, new string [] {ConfigurationManager.AppSettings.Get("DefaultCSVHead")});
             toTango = new ToTangoExport(token, headerFile, (CopyExport2SQL ? SQLConnString : ""));
@@ -134,7 +137,10 @@ namespace ToTangoXport
                         conn.Close();
                     }
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    nlog.SaveException(e);
+                }
             }
             return list;
         }
@@ -153,8 +159,9 @@ namespace ToTangoXport
                         isOK = true;
                     }
                 }
-                catch
+                catch (Exception e)
                 {
+                    nlog.SaveException(e);
                     isOK = false;
                 }
             }
