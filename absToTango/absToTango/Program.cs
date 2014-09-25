@@ -24,6 +24,7 @@ namespace absToTango
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("An Error has been raised");
                 Console.WriteLine(e.Message);
+                nlog.SaveException(e);
             }
 
             Console.ForegroundColor = ConsoleColor.White;

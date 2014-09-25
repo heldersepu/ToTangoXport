@@ -70,6 +70,7 @@ namespace absToTango
                     catch (Exception e)
                     {
                         this._err = e.Message;
+                        nlog.SaveException(e);
                     }
                 }
                 if (this._err == "")
@@ -105,6 +106,7 @@ namespace absToTango
             catch (Exception e)
             {
                 dAccount = null;
+                nlog.SaveException(e);
             }
             return dAccount;
         }
@@ -121,7 +123,10 @@ namespace absToTango
                 if (this._dJSON.response_header.name != null)
                     name = this._dJSON.response_header.name.Value;
             }
-            catch {}
+            catch (Exception e)
+            {
+                nlog.SaveException(e);
+            }
             return name;
         }
 

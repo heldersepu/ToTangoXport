@@ -148,7 +148,10 @@ namespace absToTango
             {
                 campaign = Convert.ToInt32(getAttrib(account, "campaign", "0"));
             }
-            catch {}
+            catch (Exception e)
+            {
+                nlog.SaveException(e);
+            }
             campaign++;
 
             using (WebClient client = new WebClient())
@@ -158,7 +161,10 @@ namespace absToTango
                     client.Headers.Add("Authorization", this._token);
                     client.DownloadString(confUrl + account_id + "&sdr_o.Campaign=" + campaign);
                 }
-                catch {}
+                catch (Exception e)
+                {
+                    nlog.SaveException(e);   
+                }
             }
         }
 

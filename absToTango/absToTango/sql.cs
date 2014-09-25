@@ -45,7 +45,10 @@ namespace absToTango
                         conn.Close();
                     }
                 }
-                catch {}
+                catch (Exception e)
+                {
+                    nlog.SaveException(e);
+                }
             }
             return id;
         }
@@ -54,21 +57,28 @@ namespace absToTango
         {
             if (!string.IsNullOrEmpty(_sqlConn) && (id != "0"))
             {
-                using (SqlConnection conn = new SqlConnection(_sqlConn))
+                try
                 {
-                    SqlCommand command = new SqlCommand("[event].[InsertCampaignAttribute]", conn);
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@ID", SqlDbType.Text);
-                    command.Parameters["@ID"].Value = id;
-                    command.Parameters.Add("@Account", SqlDbType.Text);
-                    command.Parameters["@Account"].Value = Account;                    
-                    command.Parameters.Add("@Key", SqlDbType.Text);
-                    command.Parameters["@Key"].Value = key;
-                    command.Parameters.Add("@Value", SqlDbType.Text);
-                    command.Parameters["@Value"].Value = value;
-                    conn.Open();
-                    command.ExecuteNonQuery();
-                    conn.Close();
+                    using (SqlConnection conn = new SqlConnection(_sqlConn))
+                    {
+                        SqlCommand command = new SqlCommand("[event].[InsertCampaignAttribute]", conn);
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@ID", SqlDbType.Text);
+                        command.Parameters["@ID"].Value = id;
+                        command.Parameters.Add("@Account", SqlDbType.Text);
+                        command.Parameters["@Account"].Value = Account;                    
+                        command.Parameters.Add("@Key", SqlDbType.Text);
+                        command.Parameters["@Key"].Value = key;
+                        command.Parameters.Add("@Value", SqlDbType.Text);
+                        command.Parameters["@Value"].Value = value;
+                        conn.Open();
+                        command.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    nlog.SaveException(e);
                 }
             }
         }
