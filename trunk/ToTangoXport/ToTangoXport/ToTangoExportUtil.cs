@@ -1,11 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using absToTango;
@@ -22,6 +18,7 @@ namespace ToTangoXport
         public string baseUrl = "";
         public string outDirectory = "";
         public string SQLConnString = "";
+        public bool CopyExport2SQL = false;
 
         public ToTangoXport()
         {
@@ -39,6 +36,7 @@ namespace ToTangoXport
                 baseUrl = ConfigurationManager.AppSettings.Get("BaseConfirmUrl");
                 outDirectory = ConfigurationManager.AppSettings.Get("OutputDirectory");
                 SQLConnString = ConfigurationManager.AppSettings.Get("SQLConnString");
+                CopyExport2SQL = (ConfigurationManager.AppSettings.Get("CopyExport2SQL") == "1");
             }
             catch (Exception) { }
             if (!File.Exists(headerFile)) 
@@ -141,14 +139,15 @@ namespace ToTangoXport
             return list;
         }
 
-        private bool TestSQL()
+        public bool TestSQL(string sqlConn = "")
         {
+            if (sqlConn == "") sqlConn = SQLConnString;
             bool isOK = false;
-            if (!string.IsNullOrEmpty(SQLConnString))
+            if (!string.IsNullOrEmpty(sqlConn))
             {
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(SQLConnString + ";Connection Timeout=2"))
+                    using (SqlConnection conn = new SqlConnection(sqlConn + ";Connection Timeout=2"))
                     {                        
                         conn.Open();
                         isOK = true;

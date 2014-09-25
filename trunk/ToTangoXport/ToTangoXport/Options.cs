@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ToTangoXport
 {
     public partial class Options : Form
     {
-        ToTangoXport parent;
+        private ToTangoXport parent;
+
         public Options(ToTangoXport tparent)
         {
             parent = tparent;
@@ -30,6 +26,7 @@ namespace ToTangoXport
             parent.UpdateSetting("ToTangoToken", txbToken.Text);
             parent.UpdateSetting("OutputDirectory", txbOutputDirectory.Text);
             parent.UpdateSetting("SQLConnString", txbSQLConnection.Text);
+            parent.UpdateSetting("CopyExport2SQL", BackupY.Checked ? "1" : "0");
             parent.InitializeTotango();
             this.Close();
         }
@@ -41,6 +38,25 @@ namespace ToTangoXport
             txbToken.Text = parent.token;
             txbOutputDirectory.Text = parent.outDirectory;
             txbSQLConnection.Text = parent.SQLConnString;
+            BackupY.Checked = parent.CopyExport2SQL;
+            BackupN.Checked = !parent.CopyExport2SQL;
+            btnTest.Enabled = (txbSQLConnection.Text.Length > 1);
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            if (parent.TestSQL(txbSQLConnection.Text))
+                txbSQLConnection.ForeColor = Color.Green;
+            else
+                txbSQLConnection.ForeColor = Color.Red;
+            btnTest.ForeColor = txbSQLConnection.ForeColor;
+        }
+
+        private void txbSQLConnection_KeyDown(object sender, KeyEventArgs e)
+        {
+            btnTest.ForeColor = Color.Black;
+            txbSQLConnection.ForeColor = Color.Black;
+            btnTest.Enabled = (txbSQLConnection.Text.Length > 1);
         }
     }
 }
