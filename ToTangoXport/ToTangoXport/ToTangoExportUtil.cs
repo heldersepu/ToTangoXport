@@ -19,6 +19,10 @@ namespace ToTangoXport
         public string outDirectory = "";
         public string SQLConnString = "";
         public bool CopyExport2SQL = false;
+        public bool doFTP = false;
+        public string FTPServer = "";
+        public string FTPUserName = "";
+        public string FTPPassword = "";
 
         public ToTangoXport()
         {
@@ -37,6 +41,11 @@ namespace ToTangoXport
                 outDirectory = ConfigurationManager.AppSettings.Get("OutputDirectory");
                 SQLConnString = ConfigurationManager.AppSettings.Get("SQLConnString");
                 CopyExport2SQL = (ConfigurationManager.AppSettings.Get("CopyExport2SQL") == "1");
+
+                doFTP = (ConfigurationManager.AppSettings.Get("DoFTP") == "1");
+                FTPServer = ConfigurationManager.AppSettings.Get("FTPServer");
+                FTPUserName = ConfigurationManager.AppSettings.Get("FTPUserName");
+                FTPPassword = ConfigurationManager.AppSettings.Get("FTPPassword");
             }
             catch (Exception e)
             {

@@ -29,6 +29,11 @@ namespace ToTangoXport
             parent.UpdateSetting("OutputDirectory", txbOutputDirectory.Text);
             parent.UpdateSetting("SQLConnString", txbSQLConnection.Text);
             parent.UpdateSetting("CopyExport2SQL", BackupY.Checked ? "1" : "0");
+
+            parent.UpdateSetting("DoFTP", FTPUploadY.Checked ? "1" : "0");
+            parent.UpdateSetting("FTPServer", txbFTPServer.Text);
+            parent.UpdateSetting("FTPUserName", txbFTPUserName.Text);
+            parent.UpdateSetting("FTPPassword", txbFTPPassword.Text);
             parent.InitializeTotango();
             this.Close();
         }
@@ -43,6 +48,13 @@ namespace ToTangoXport
             BackupY.Checked = parent.CopyExport2SQL;
             BackupN.Checked = !parent.CopyExport2SQL;
             btnTest.Enabled = (txbSQLConnection.Text.Length > 1);
+
+            FTPUploadY.Checked = parent.doFTP;
+            FTPUploadN.Checked = !FTPUploadY.Checked;
+            txbFTPServer.Text = parent.FTPServer;
+            txbFTPUserName.Text = parent.FTPUserName;
+            txbFTPPassword.Text = parent.FTPPassword;
+            btnTestFTP_change(sender, null);
         }
 
         private void btnTest_Click(object sender, EventArgs e)
@@ -102,6 +114,37 @@ namespace ToTangoXport
         {
             txbOutputDirectory.ForeColor = Color.Black;
             btnTestDir.ForeColor = Color.Black;
+        }
+
+        private void btnTestFTP_change(object sender, KeyEventArgs e)
+        {
+            btnTestFTP.Enabled = ((txbFTPServer.Text.Length > 2) && (txbFTPUserName.Text.Length > 2) && (txbFTPPassword.Text.Length > 2));
+            btnTestFTP.ForeColor = Color.Black;
+            txbFTPServer.ForeColor = Color.Black;
+            txbFTPUserName.ForeColor = Color.Black;
+            txbFTPPassword.ForeColor = Color.Black;
+        }
+
+        private void btnTestFTP_Click(object sender, EventArgs e)
+        {
+            btnTestFTP_change(sender, null);
+            if (btnTestFTP.Enabled)
+            {
+                btnTestFTP.ForeColor = Color.Red;
+                try
+                {
+                    string fileName = "test.csv";
+                    File.WriteAllText(fileName, "TEST");
+                    ftp myFTP = new ftp(txbFTPServer.Text, txbFTPUserName.Text, txbFTPPassword.Text);
+                    if (myFTP.upload(fileName, fileName))
+                        if (myFTP.delete(fileName))
+                            btnTestFTP.ForeColor = Color.Green;
+                }
+                catch {}                                 
+                txbFTPServer.ForeColor = btnTestFTP.ForeColor;
+                txbFTPUserName.ForeColor = btnTestFTP.ForeColor;
+                txbFTPPassword.ForeColor = btnTestFTP.ForeColor;
+            }
         }
 
     }

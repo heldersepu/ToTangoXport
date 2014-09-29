@@ -49,10 +49,22 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txbFTPPassword = new System.Windows.Forms.TextBox();
+            this.txbFTPUserName = new System.Windows.Forms.TextBox();
+            this.txbFTPServer = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.FTPUploadN = new System.Windows.Forms.RadioButton();
+            this.FTPUploadY = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnTestFTP = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -69,6 +81,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(6, 19);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -274,6 +287,120 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btnTestFTP);
+            this.tabPage3.Controls.Add(this.FTPUploadN);
+            this.tabPage3.Controls.Add(this.FTPUploadY);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.txbFTPPassword);
+            this.tabPage3.Controls.Add(this.txbFTPUserName);
+            this.tabPage3.Controls.Add(this.txbFTPServer);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(521, 174);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "FTP";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // txbFTPPassword
+            // 
+            this.txbFTPPassword.Location = new System.Drawing.Point(119, 116);
+            this.txbFTPPassword.Name = "txbFTPPassword";
+            this.txbFTPPassword.Size = new System.Drawing.Size(354, 20);
+            this.txbFTPPassword.TabIndex = 21;
+            this.txbFTPPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnTestFTP_change);
+            // 
+            // txbFTPUserName
+            // 
+            this.txbFTPUserName.Location = new System.Drawing.Point(119, 82);
+            this.txbFTPUserName.Name = "txbFTPUserName";
+            this.txbFTPUserName.Size = new System.Drawing.Size(354, 20);
+            this.txbFTPUserName.TabIndex = 20;
+            this.txbFTPUserName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnTestFTP_change);
+            // 
+            // txbFTPServer
+            // 
+            this.txbFTPServer.Location = new System.Drawing.Point(119, 48);
+            this.txbFTPServer.Name = "txbFTPServer";
+            this.txbFTPServer.Size = new System.Drawing.Size(354, 20);
+            this.txbFTPServer.TabIndex = 19;
+            this.txbFTPServer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnTestFTP_change);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(62, 119);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Password:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(58, 85);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "UserName:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(77, 51);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(41, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "Server:";
+            // 
+            // FTPUploadN
+            // 
+            this.FTPUploadN.AutoSize = true;
+            this.FTPUploadN.Checked = true;
+            this.FTPUploadN.Location = new System.Drawing.Point(328, 22);
+            this.FTPUploadN.Name = "FTPUploadN";
+            this.FTPUploadN.Size = new System.Drawing.Size(39, 17);
+            this.FTPUploadN.TabIndex = 27;
+            this.FTPUploadN.TabStop = true;
+            this.FTPUploadN.Text = "No";
+            this.FTPUploadN.UseVisualStyleBackColor = true;
+            // 
+            // FTPUploadY
+            // 
+            this.FTPUploadY.AutoSize = true;
+            this.FTPUploadY.Location = new System.Drawing.Point(279, 22);
+            this.FTPUploadY.Name = "FTPUploadY";
+            this.FTPUploadY.Size = new System.Drawing.Size(43, 17);
+            this.FTPUploadY.TabIndex = 26;
+            this.FTPUploadY.Text = "Yes";
+            this.FTPUploadY.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(187, 24);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(86, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Upload To FTP?";
+            // 
+            // btnTestFTP
+            // 
+            this.btnTestFTP.Enabled = false;
+            this.btnTestFTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestFTP.Location = new System.Drawing.Point(429, 125);
+            this.btnTestFTP.Name = "btnTestFTP";
+            this.btnTestFTP.Size = new System.Drawing.Size(56, 22);
+            this.btnTestFTP.TabIndex = 28;
+            this.btnTestFTP.Text = "Test";
+            this.btnTestFTP.UseVisualStyleBackColor = true;
+            this.btnTestFTP.Click += new System.EventHandler(this.btnTestFTP_Click);
+            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,6 +421,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -321,5 +450,16 @@
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.ComboBox txbOutputDirectory;
         private System.Windows.Forms.Button btnTestDir;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox txbFTPPassword;
+        private System.Windows.Forms.TextBox txbFTPUserName;
+        private System.Windows.Forms.TextBox txbFTPServer;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.RadioButton FTPUploadN;
+        private System.Windows.Forms.RadioButton FTPUploadY;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnTestFTP;
     }
 }
