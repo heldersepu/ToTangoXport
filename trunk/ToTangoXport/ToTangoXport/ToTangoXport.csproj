@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ftp.cs" />
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
