@@ -105,8 +105,9 @@ namespace ToTangoXport
                 else if (arg.ToUpper() == "USESQL")
                 {
                     List<string> list = GetUrlListFromSQL();
+                    nlog.SaveDebug("Total URL(s) to process = " + list.Count.ToString());
                     Console.Write("Total URL(s) to process = ");
-                    Console.WriteLine(list.Count);
+                    Console.WriteLine(list.Count);                    
                     for (int i = 0; i < list.Count; i++)
                     {
                         nlog.SaveDebug(list[i]);
