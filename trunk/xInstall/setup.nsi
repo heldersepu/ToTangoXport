@@ -35,6 +35,14 @@ UninstPage instfiles
 ShowInstDetails show
 ShowUninstDetails show
 
+Function .onInit
+	IfFileExists "$INSTDIR\*.*" 0 +4
+        CreateDirectory "$INSTDIR\BACKUP"
+        CopyFiles /SILENT "$INSTDIR\*.csv" "$INSTDIR\BACKUP" 1024
+        CopyFiles /SILENT "$INSTDIR\*.Config" "$INSTDIR\BACKUP" 1024
+	DetailPrint "Backup Complete"
+FunctionEnd
+
 Function .onInstSuccess
 	Exec "$INSTDIR\ToTangoXport.exe"
 FunctionEnd
