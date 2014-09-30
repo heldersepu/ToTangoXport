@@ -46,6 +46,8 @@ namespace ToTangoXport
                 FTPServer = ConfigurationManager.AppSettings.Get("FTPServer");
                 FTPUserName = ConfigurationManager.AppSettings.Get("FTPUserName");
                 FTPPassword = ConfigurationManager.AppSettings.Get("FTPPassword");
+                if (!Directory.Exists(outDirectory))
+                    Directory.CreateDirectory(outDirectory);
             }
             catch (Exception e)
             {
@@ -140,7 +142,7 @@ namespace ToTangoXport
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            list.Add(reader["URL"].ToString());
+                            list.Add(reader["URL"].ToString().Trim());
                         }
                         reader.Close();
                         conn.Close();
