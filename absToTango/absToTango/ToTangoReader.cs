@@ -78,7 +78,7 @@ namespace absToTango
                     this._dJSON = JsonConvert.DeserializeObject(json);
                     this._item_count = (int)this._dJSON.current_item_count;
                     this._total_items = (int)this._dJSON.total_items;
-                    this._global_item_count += this._global_item_count;
+                    this._global_item_count += ((_item_count == 0) ? 10 : _item_count);
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace absToTango
             dynamic dAccount = null;
             try
             {
-                if (this._global_item_count < this._total_items)
+                if (this._global_item_count <= this._total_items)
                 {
                     if (this._item_count == this._pos)
                     {
@@ -100,7 +100,8 @@ namespace absToTango
                         this.initJSON();
                         this._pos = 0;
                     }
-                    dAccount = this._dJSON.accounts[this._pos++];
+                    if (this._global_item_count <= this._total_items)
+                        dAccount = this._dJSON.accounts[this._pos++];
                 }
             }
             catch (Exception e)
